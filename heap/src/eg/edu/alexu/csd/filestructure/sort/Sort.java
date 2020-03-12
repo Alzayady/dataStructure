@@ -1,0 +1,60 @@
+package eg.edu.alexu.csd.filestructure.sort;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
+public class Sort <T extends Comparable<T>>  implements ISort<T> {
+
+    @Override
+    public IHeap<T> heapSort(ArrayList<T> arrayList) {
+        if(arrayList==null)return new Heap<>();
+        Heap<T> heap=new Heap<>();
+        heap.build(arrayList);
+        int i = arrayList.size()-1;
+        while (heap.size()>0){ arrayList.set(i--,heap.extract()); }
+        heap.setSize(arrayList.size());
+        return heap;
+    }
+
+    @Override
+    public void sortSlow(ArrayList<T> arrayList) {
+        if(arrayList==null)return;
+        for(int i = 0 ; i <arrayList.size() ; i++){
+            boolean f =true;
+            for(int j = 0 ; j < arrayList.size() - i -1  ; j++){
+                if(arrayList.get(j).compareTo(arrayList.get(j+1))>0) {
+                    T v = arrayList.get(j);
+                    arrayList.set(j, arrayList.get(j + 1));
+                    arrayList.set(j + 1, v);
+                    f = false;
+                }
+            }
+            if(f)break;
+        }
+    }
+
+    @Override
+     public void sortFast(ArrayList<T> arrayList) {
+        if(arrayList==null)return;
+        ArrayList<T> m =new ArrayList<>();
+        for(int i = 0 ; i < arrayList.size() ; i++)m.add(null);
+        for(int  start = 1 ; start<arrayList.size() ; start<<=1 ){
+                    for(int i = 0 ; i <arrayList.size();i+=start*2){
+                        int p1 = i ;
+                        int p2 = i +start ;
+                        int in=0;
+                        while (p2<arrayList.size()&&p1<i+start&&p2<i+2*start){
+                            if(arrayList.get(p1).compareTo(arrayList.get(p2))>0){
+                                     m.set(in++,arrayList.get(p2++));
+                            }else  m.set(in++,arrayList.get(p1++));
+                        }
+                        while (p1<arrayList.size()&&p1<i+start)m.set(in++,arrayList.get(p1++));
+                        while (p2<arrayList.size()&&p2<i+start*2)m.set(in++,arrayList.get(p2++));
+                        in=0;
+                        for(int j = i ; j < Math.min(i+start*2,arrayList.size()) ; j++){
+                            arrayList.set(j,m.get(in++));
+                        }
+                    }
+           }
+    }
+}
