@@ -1,9 +1,5 @@
 package eg.edu.alexu.csd.filestructure.sort;
 
-import eg.edu.alexu.csd.filestructure.sort.Heap;
-import eg.edu.alexu.csd.filestructure.sort.IHeap;
-import eg.edu.alexu.csd.filestructure.sort.INode;
-
 public class Node  <T extends Comparable<T>>  implements INode<T>  {
     private int index ;
     private Heap heap ;
@@ -37,8 +33,4 @@ public class Node  <T extends Comparable<T>>  implements INode<T>  {
     public void setValue(T value) {
         this.value=value;
     }
-
-//    public boolean isInHeap(){
-//        return index<=heap.size();
-//    }
 }

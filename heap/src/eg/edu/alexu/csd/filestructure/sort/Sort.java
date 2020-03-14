@@ -1,6 +1,5 @@
 package eg.edu.alexu.csd.filestructure.sort;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Sort <T extends Comparable<T>>  implements ISort<T> {

@@ -115,15 +115,7 @@ public class Heap <T extends Comparable<T>> implements IHeap <T>{
     public boolean IsEmpty(){
         return this.size==1;
     }
-    @Override
-    public String toString(){
-        String s ="";
-        for(int i = 1 ; i <size ; i++){
-            //s+=nodes[i].getValue().toString()+" ";
-        }
-        return s;
-    }
-    void  setSize(int x){
+    public void  setSize(int x){
         size=x+1;
     }
 }
