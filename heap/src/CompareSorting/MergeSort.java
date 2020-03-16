@@ -13,10 +13,8 @@ public class MergeSort <T extends Comparable<T>> implements  Runnable {
     public void run() {
         ISort<T> sort=new Sort<>();
         long timeBefore =System.currentTimeMillis();
-        System.out.println(ANSI_GREEN+"MERGE SORT STARTED");
+   //     System.out.println(ANSI_GREEN+"MERGE SORT STARTED with size "+ unSortedArray.size());
         sort.sortFast(unSortedArray);
-        System.out.println(ANSI_GREEN + "MERGE SORT ENDS at time " + (System.currentTimeMillis() - timeBefore )+  " MS");
-//        for(Object i : unSortedArray) System.out.println(ANSI_GREEN+i);
-
+        System.out.println(ANSI_GREEN + unSortedArray.size() +" " +(System.currentTimeMillis() - timeBefore ));
     }
 }

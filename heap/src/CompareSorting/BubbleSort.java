@@ -14,9 +14,8 @@ public class BubbleSort <T extends Comparable<T>> implements  Runnable {
     public void run() {
         ISort<T> sort=new Sort<>();
         long timeBefore =System.currentTimeMillis();
-        System.out.println(ANSI_RED+"BubbleSort STARTED");
+    //    System.out.println(ANSI_RED+"BubbleSort STARTED size " +unSortedArray.size());
         sort.sortSlow(unSortedArray);
-        System.out.println(ANSI_RED+"Bubble Sort ENDS at time " + (System.currentTimeMillis() - timeBefore )+  " MS");
-//        for(Object i : unSortedArray) System.out.println(ANSI_RED+i);
+        System.out.println(ANSI_RED +unSortedArray.size()+" "+(System.currentTimeMillis() - timeBefore ) );
     }
 }

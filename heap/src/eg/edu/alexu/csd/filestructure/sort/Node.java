@@ -33,4 +33,8 @@ public class Node  <T extends Comparable<T>>  implements INode<T>  {
     public void setValue(T value) {
         this.value=value;
     }
+
+    public void setHeap(Heap heap) {
+        this.heap = heap;
+    }
 }

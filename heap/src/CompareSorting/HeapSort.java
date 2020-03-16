@@ -15,10 +15,9 @@ public class HeapSort <T extends Comparable<T>> implements  Runnable {
     public void run() {
         ISort<T> sort=new Sort<>();
         long timeBefore =System.currentTimeMillis();
-        System.out.println(ANSI_PURPLE+"Heap Sort STARTED");
+        System.out.println(ANSI_PURPLE+"Heap Sort STARTED with size" + unSortedArray.size());
         sort.heapSort(unSortedArray);
-        System.out.println(ANSI_PURPLE+"Heap Sort ENDS at time " + (System.currentTimeMillis() - timeBefore )+  " MS");
-//        for(Object i : unSortedArray) System.out.println(ANSI_PURPLE+i);
+        System.out.println(ANSI_PURPLE+"Heap Sort ENDS at time " + (System.currentTimeMillis() - timeBefore )+  " MS size " + unSortedArray.size());
 
     }
 }

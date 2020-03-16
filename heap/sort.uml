@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>eg.edu.alexu.csd.filestructure.sort</OriginalElement>
+  <nodes>
+    <node x="391.1666666666667" y="169.0">eg.edu.alexu.csd.filestructure.sort.Node</node>
+    <node x="982.3265873015873" y="0.0">eg.edu.alexu.csd.filestructure.sort.TestRunner</node>
+    <node x="861.0" y="1205.0">eg.edu.alexu.csd.filestructure.sort.Main1</node>
+    <node x="252.0" y="1205.0">eg.edu.alexu.csd.filestructure.sort.ReflectionHelper</node>
+    <node x="569.4912698412699" y="893.0">eg.edu.alexu.csd.filestructure.sort.Sort</node>
+    <node x="0.0" y="0.0">eg.edu.alexu.csd.filestructure.sort.UnitTest</node>
+    <node x="96.5" y="1001.0">eg.edu.alexu.csd.filestructure.sort.UnitTest.Pair</node>
+    <node x="0.0" y="1205.0">eg.edu.alexu.csd.filestructure.sort.IntegrationTest</node>
+    <node x="400.8265873015873" y="444.0">eg.edu.alexu.csd.filestructure.sort.Heap</node>
+    <node x="482.040873015873" y="0.0">eg.edu.alexu.csd.filestructure.sort.INode</node>
+    <node x="690.8265873015873" y="595.0">eg.edu.alexu.csd.filestructure.sort.ISort</node>
+    <node x="668.0" y="1205.0">eg.edu.alexu.csd.filestructure.sort.MainTester</node>
+    <node x="1054.0" y="1205.0">eg.edu.alexu.csd.filestructure.sort.Main</node>
+    <node x="707.9369047619048" y="190.0">eg.edu.alexu.csd.filestructure.sort.IHeap</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="eg.edu.alexu.csd.filestructure.sort.Heap" target="eg.edu.alexu.csd.filestructure.sort.Node">
+      <point x="-115.71428571428578" y="-199.5" />
+      <point x="420.11230158730154" y="424.0" />
+      <point x="416.00000000000006" y="424.0" />
+      <point x="-49.66666666666663" y="112.5" />
+    </edge>
+    <edge source="eg.edu.alexu.csd.filestructure.sort.Sort" target="eg.edu.alexu.csd.filestructure.sort.ISort">
+      <point x="28.75" y="-48.5" />
+      <point x="713.2412698412699" y="863.0" />
+      <point x="805.8265873015873" y="863.0" />
+      <point x="0.0" y="48.5" />
+    </edge>
+    <edge source="eg.edu.alexu.csd.filestructure.sort.Node" target="eg.edu.alexu.csd.filestructure.sort.Heap">
+      <point x="0.0" y="112.5" />
+      <point x="465.6666666666667" y="424.0" />
+      <point x="458.6837301587301" y="424.0" />
+      <point x="-77.14285714285722" y="-199.5" />
+    </edge>
+    <edge source="eg.edu.alexu.csd.filestructure.sort.UnitTest.Pair" target="eg.edu.alexu.csd.filestructure.sort.UnitTest">
+      <point x="0.0" y="-79.5" />
+      <point x="0.0" y="475.5" />
+    </edge>
+    <edge source="eg.edu.alexu.csd.filestructure.sort.ISort" target="eg.edu.alexu.csd.filestructure.sort.IHeap">
+      <point x="0.0" y="-48.5" />
+      <point x="805.8265873015873" y="424.0" />
+      <point x="824.1869047619048" y="424.0" />
+      <point x="23.25" y="91.5" />
+    </edge>
+    <edge source="eg.edu.alexu.csd.filestructure.sort.Sort" target="eg.edu.alexu.csd.filestructure.sort.IHeap">
+      <point x="86.25" y="-48.5" />
+      <point x="770.7412698412699" y="873.0" />
+      <point x="931.3265873015873" y="873.0" />
+      <point x="931.3265873015873" y="424.0" />
+      <point x="870.6869047619048" y="424.0" />
+      <point x="69.75" y="91.5" />
+    </edge>
+    <edge source="eg.edu.alexu.csd.filestructure.sort.Heap" target="eg.edu.alexu.csd.filestructure.sort.INode">
+      <point x="0.0" y="-199.5" />
+      <point x="535.8265873015873" y="424.0" />
+      <point x="550.6666666666667" y="424.0" />
+      <point x="550.6666666666667" y="144.0" />
+      <point x="553.540873015873" y="144.0" />
+      <point x="0.0" y="59.5" />
+    </edge>
+    <edge source="eg.edu.alexu.csd.filestructure.sort.IHeap" target="eg.edu.alexu.csd.filestructure.sort.INode">
+      <point x="0.0" y="-91.5" />
+      <point x="800.9369047619048" y="144.0" />
+      <point x="610.740873015873" y="144.0" />
+      <point x="57.200000000000045" y="59.5" />
+    </edge>
+    <edge source="eg.edu.alexu.csd.filestructure.sort.Node" target="eg.edu.alexu.csd.filestructure.sort.INode">
+      <point x="37.25" y="-112.5" />
+      <point x="502.9166666666667" y="144.0" />
+      <point x="524.940873015873" y="144.0" />
+      <point x="-28.600000000000023" y="59.5" />
+    </edge>
+    <edge source="eg.edu.alexu.csd.filestructure.sort.Sort" target="eg.edu.alexu.csd.filestructure.sort.Heap">
+      <point x="-86.25" y="-48.5" />
+      <point x="598.2412698412699" y="873.0" />
+      <point x="468.3265873015873" y="873.0" />
+      <point x="-67.5" y="199.5" />
+    </edge>
+    <edge source="eg.edu.alexu.csd.filestructure.sort.Heap" target="eg.edu.alexu.csd.filestructure.sort.IHeap">
+      <point x="115.71428571428567" y="-199.5" />
+      <point x="651.540873015873" y="424.0" />
+      <point x="777.6869047619048" y="424.0" />
+      <point x="-23.25" y="91.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.7000000000000001" x="872.8571428571425" y="710.2857142857142" />
+  <SelectedNodes>
+    <node>eg.edu.alexu.csd.filestructure.sort.Sort</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

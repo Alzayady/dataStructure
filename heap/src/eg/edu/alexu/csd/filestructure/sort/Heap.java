@@ -4,13 +4,19 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-public class Heap <T extends Comparable<T>> implements IHeap <T>{
+public class Heap <T extends Comparable<T>> implements IHeap <T> {
     private int size ;
-    private ArrayList<  INode<T>  > nodes ;
+    private ArrayList<  INode<T>  > nodes;
     public Heap(){
         nodes=new ArrayList<>();
         nodes.add(null);
         size=1;
+    }
+    private Heap( ArrayList<  INode<T>  >  nodes){
+        this.nodes=new ArrayList<>();
+        this.nodes.add(null);
+        for(int i = 1 ; i <nodes.size() ;i++)this.nodes.add(new Node<>(this,nodes.get(i).getValue(),i));
+        this.size=nodes.size();
     }
 
     public INode<T> getNode(int index){
@@ -51,10 +57,8 @@ public class Heap <T extends Comparable<T>> implements IHeap <T>{
         heapify(node);
     }
     private INode<T> getMax(INode <T> n1 , INode <T> n2 ){
-        //if(n1==null||!((Node)n1).isInHeap())return n2;
         if(n1==null)return n2;
         if(n2==null)return n1;
-       // if(n2==null||!((Node)n2).isInHeap())return n1;
         if(n1.getValue().compareTo(n2.getValue())>0)return n1;
         return n2;
     }
@@ -110,12 +114,12 @@ public class Heap <T extends Comparable<T>> implements IHeap <T>{
         return 1<<ans;
     }
 
-
-
-    public boolean IsEmpty(){
-        return this.size==1;
+    @Override
+    public IHeap <T> clone(){
+      return new Heap<T>(nodes);
     }
-    public void  setSize(int x){
-        size=x+1;
-    }
+
+   // public void  setSize(int x){
+       // size=x+1;
+    //}
 }
