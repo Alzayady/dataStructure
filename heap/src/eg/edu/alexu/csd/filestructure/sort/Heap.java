@@ -119,7 +119,4 @@ public class Heap <T extends Comparable<T>> implements IHeap <T> {
       return new Heap<T>(nodes);
     }
 
-   // public void  setSize(int x){
-       // size=x+1;
-    //}
 }
