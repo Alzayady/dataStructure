@@ -1,11 +1,12 @@
 package REDBLACKTREE.chain_deletion;
 
+import REDBLACKTREE.Fixing_Tree;
 import REDBLACKTREE.INode;
 import REDBLACKTREE.RedBlackTree;
 
 public class Red_sibling_right_deletion <T extends Comparable<T>, V> extends Deletion<T,V> {
-    public Red_sibling_right_deletion( INode<T, V> root,RedBlackTree<T, V> redBlackTree) {
-        super(root, redBlackTree);
+    public Red_sibling_right_deletion( Fixing_Tree<T, V> fixing_tree) {
+        super( fixing_tree);
     }
 
     @Override
@@ -18,7 +19,7 @@ public class Red_sibling_right_deletion <T extends Comparable<T>, V> extends Del
         INode<T,V>sibling=parent.getRightChild();
 
 
-        left_Rotation(bad_node.getParent());
+        fixing_tree.left_Rotation(bad_node.getParent());
 
         sibling.setColor(INode.BLACK);
         parent.setColor(INode.RED);
@@ -31,6 +32,6 @@ public class Red_sibling_right_deletion <T extends Comparable<T>, V> extends Del
     boolean my_type(INode<T, V> root_node) {
         INode<T,V> sibling=root_node.getParent().getRightChild();
         if(sibling.isNull())return false;
-        return sibling.getColor()==INode.RED&&I_AM_LEFT_CHILD(root_node);
+        return sibling.getColor()==INode.RED&&fixing_tree.I_AM_LEFT_CHILD(root_node);
     }
 }

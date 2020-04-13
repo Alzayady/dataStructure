@@ -1,12 +1,13 @@
 package REDBLACKTREE.chain_insertion;
 
+import REDBLACKTREE.Fixing_Tree;
 import REDBLACKTREE.INode;
 import REDBLACKTREE.RedBlackTree;
 
 public class Left_right_insertion<T extends Comparable<T>, V> extends Insertion <T,V> {
 
-    public Left_right_insertion(INode<T, V> root, RedBlackTree<T,V> redBlackTree) {
-        super(root,redBlackTree);
+    public Left_right_insertion(Fixing_Tree<T,V> fixing_tree){
+        super(fixing_tree);
     }
 
 
@@ -20,10 +21,11 @@ public class Left_right_insertion<T extends Comparable<T>, V> extends Insertion 
 
 
         INode<T,V>red_node=root_node.getLeftChild();
-        INode<T,V>grand_father=root_node.getParent();
         INode<T,V> sec_red_node=red_node.getRightChild();
 
-        swap_parents(root_node,sec_red_node,grand_father);
+
+
+        fixing_tree.swap_parent(root_node,sec_red_node);
 
         INode<T,V> temp_left=sec_red_node.getLeftChild();
         INode<T,V> temp_right=sec_red_node.getRightChild();

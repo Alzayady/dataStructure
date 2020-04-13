@@ -1,62 +1,14 @@
 package REDBLACKTREE;
-import REDBLACKTREE.chain_deletion.*;
-import REDBLACKTREE.chain_insertion.*;
 import javax.management.RuntimeErrorException;
 
 public class RedBlackTree <T extends Comparable<T>, V> implements IRedBlackTree<T,V> {
 
     private INode<T,V> root;
-// chain of responsibility design pattern to insertion
-    private Insertion<T,V> left_left_insertion;
-    private Insertion<T,V> left_right_insertion;
-    private Insertion<T,V> right_left_insertion;
-    private Insertion<T,V> right_right_insertion;
-    private Insertion<T,V> special_insertion;
-
-    private Deletion<T,V> left_left_deletion;
-    private Deletion<T,V> right_right_deletion;
-    private Deletion<T,V> left_right_deletion;
-    private Deletion<T,V> right_left_deletion;
-    private Deletion<T,V>red_sibling_left;
-    private Deletion<T,V>red_sibling_right;
-    private Deletion<T,V>three_node_left;
-    private Deletion<T,V>three_node_right;
+    private Fixing_Tree<T,V>fixing_tree;
 
    public RedBlackTree(){
        this.root=new Null_Node<>();
-       set_chain_of_deletion();
-       set_chain_of_insertion();
-    }
-    private void set_chain_of_insertion(){
-        left_left_insertion=new Left_left_insertion<>(root,this);
-        left_right_insertion=new Left_right_insertion<>(root,this);
-        right_left_insertion=new Right_left_insertion<>(root,this);
-        right_right_insertion=new Right_right_insertion<>(root,this);
-        special_insertion=new Special_insertion<>(root,this);
-
-        special_insertion.set_next(left_left_insertion);
-        left_left_insertion.set_next(left_right_insertion);
-        left_right_insertion.set_next(right_left_insertion);
-        right_left_insertion.set_next(right_right_insertion);
-    }
-    private void set_chain_of_deletion(){
-        left_left_deletion=new Left_left_deletion<>(root,this);
-        right_right_deletion=new Right_right_deletion<>(root,this);
-        left_right_deletion=new Left_right_deletion<>(root,this);
-        right_left_deletion=new Right_left_deletion<>(root,this);
-        red_sibling_left=new Red_sibling_left_deletion<>(root,this);
-        red_sibling_right=new Red_sibling_right_deletion<>(root,this);
-        three_node_left=new Three_Node_left_deletion<>(root,this);
-        three_node_right=new Three_Node_right_deletion<>(root,this);
-
-        left_left_deletion.set_next(right_right_deletion);
-        right_right_deletion.set_next(left_right_deletion);
-        left_right_deletion.set_next(right_left_deletion);
-        right_left_deletion.set_next(red_sibling_left);
-        red_sibling_left.set_next(red_sibling_right);
-        red_sibling_right.set_next(three_node_left);
-        three_node_left.set_next(three_node_right);
-        three_node_right.set_next(left_left_deletion);
+       fixing_tree=new Fixing_Tree<>(this);
     }
 
     @Override
@@ -76,20 +28,6 @@ public class RedBlackTree <T extends Comparable<T>, V> implements IRedBlackTree<
 
     public void set_Root(INode<T, V> new_root){
        this.root=new_root;
-       special_insertion.setRoot(new_root);
-       left_right_insertion.setRoot(new_root);
-       left_left_insertion.setRoot(new_root);
-       right_left_insertion.setRoot(new_root);
-       right_right_insertion.setRoot(new_root);
-
-        left_left_deletion.setRoot(new_root);
-        right_right_deletion.setRoot(new_root);
-        left_right_deletion.setRoot(new_root);
-        right_left_deletion.setRoot(new_root);
-        red_sibling_left.setRoot(new_root);
-        red_sibling_right.setRoot(new_root);
-        three_node_left.setRoot(new_root);
-        three_node_right.setRoot(new_root);
     }
     @Override
     public V search(T key)  {
@@ -128,7 +66,6 @@ public class RedBlackTree <T extends Comparable<T>, V> implements IRedBlackTree<
         insert(inserted_node);
     }
 
-
     private  void insert( INode<T,V>inserted_node){
         INode<T,V> current_Node=get_position(inserted_node.getKey());
         if(!current_Node.isNull())
@@ -156,7 +93,7 @@ public class RedBlackTree <T extends Comparable<T>, V> implements IRedBlackTree<
         boolean fixed=false;
         while(!current_Node.isNull()){
             if(Num_of_red_nodes==2){
-                special_insertion.fix(current_Node);
+                fixing_tree.fix_after_insertion(current_Node);
                 Num_of_red_nodes=0;
                 fixed=true;
             }
@@ -168,7 +105,6 @@ public class RedBlackTree <T extends Comparable<T>, V> implements IRedBlackTree<
             current_Node=current_Node.getParent();
         }
     }
-
 
     private INode<T,V> get_position(T key ){
        INode<T,V> current_Node=root;
@@ -199,9 +135,7 @@ public class RedBlackTree <T extends Comparable<T>, V> implements IRedBlackTree<
         INode<T,V> successor_of_deleted_node=get_successor(deleted_node);
         swap_nodes(deleted_node,successor_of_deleted_node);
 
-        deleted_node=successor_of_deleted_node;
-
-
+        deleted_node=successor_of_deleted_node; // delete the successor of the target node
 
         if(deleted_node.getColor()==INode.RED)
         {
@@ -210,19 +144,15 @@ public class RedBlackTree <T extends Comparable<T>, V> implements IRedBlackTree<
         }
         INode<T,V>parent=deleted_node.getParent();
 
-
         if(check_one_of_child_of_deleted_node_is_red_and_replace_it(deleted_node)) return true;
-
 
         INode<T,V>empty_node=new Null_Node<>();
         if(parent.getRightChild()==deleted_node)parent.setRightChild(empty_node);
         else parent.setLeftChild(empty_node);
         empty_node.setParent(parent);
 
-        right_left_deletion.fix(empty_node);
-
+        fixing_tree.fix_after_Deletion(empty_node);
         return true;
-
     }
 
     private boolean check_one_of_child_of_deleted_node_is_red_and_replace_it(INode<T,V> deleted_node) {
@@ -260,7 +190,7 @@ public class RedBlackTree <T extends Comparable<T>, V> implements IRedBlackTree<
         empty_node.setParent(parent);
     }
 
-    public static <T extends Comparable<T>, V> void swap_nodes(INode<T,V> node1, INode<T,V> node2) {
+    public static <T extends Comparable<T>,V> void swap_nodes(INode<T,V> node1, INode<T,V> node2) {
       T temp_key=node1.getKey();
       V temp_value=node1.getValue();
       node1.setKey(node2.getKey());

@@ -1,12 +1,13 @@
 package REDBLACKTREE.chain_insertion;
 
+import REDBLACKTREE.Fixing_Tree;
 import REDBLACKTREE.INode;
 import REDBLACKTREE.RedBlackTree;
 
 public class Special_insertion <T extends Comparable<T>, V> extends Insertion <T,V> {
 
-    public Special_insertion(INode<T, V> root, RedBlackTree<T,V> redBlackTree) {
-        super(root,redBlackTree);
+    public Special_insertion(Fixing_Tree<T,V> fixing_tree){
+        super(fixing_tree);
     }
 
     @Override
@@ -16,7 +17,7 @@ public class Special_insertion <T extends Comparable<T>, V> extends Insertion <T
             return;
         }
 
-        if(root_node==root)
+        if(fixing_tree.is_root(root_node))
             root_node.setColor(INode.BLACK);
         else
             root_node.setColor(INode.RED);

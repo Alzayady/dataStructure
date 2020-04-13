@@ -1,15 +1,12 @@
 package REDBLACKTREE;
 
-
 import javax.management.RuntimeErrorException;
 import java.util.*;
-
 
 public class tree_map <T extends Comparable<T>, V> implements ITreeMap<T,V> {
 
     private IRedBlackTree<T,V>redBlackTree ;
     private int size;
-
 
     public tree_map(){
         redBlackTree=new RedBlackTree<>();
@@ -30,7 +27,6 @@ public class tree_map <T extends Comparable<T>, V> implements ITreeMap<T,V> {
         if(position.isNull())return null;
         return new map_entry<>(position.getParent());
     }
-
 
     @Override
     public T ceilingKey(T key) {
@@ -54,8 +50,6 @@ public class tree_map <T extends Comparable<T>, V> implements ITreeMap<T,V> {
         check_parameter(value);
         return dfs(redBlackTree.getRoot(),value);
     }
-
-
 
     @Override
     public Set<Map.Entry<T, V>> entrySet() {
@@ -202,8 +196,6 @@ public class tree_map <T extends Comparable<T>, V> implements ITreeMap<T,V> {
        redBlackTree.insert(key,value);
     }
 
-
-
     @Override
     public void putAll(Map<T, V> map) {
         check_parameter(map);
@@ -212,8 +204,6 @@ public class tree_map <T extends Comparable<T>, V> implements ITreeMap<T,V> {
             put(ele.getKey(),ele.getValue());
         }
     }
-
-
 
 
     @Override
@@ -243,7 +233,6 @@ public class tree_map <T extends Comparable<T>, V> implements ITreeMap<T,V> {
         }
         return elements;
     }
-
 
 
 
@@ -283,8 +272,6 @@ public class tree_map <T extends Comparable<T>, V> implements ITreeMap<T,V> {
         if(param1==null) throw new RuntimeErrorException(new Error());
     }
 
-
-
     private class map_entry<T extends Comparable<T>, V> implements Map.Entry<T, V> {
         private T key;
         private V value;
@@ -310,5 +297,4 @@ public class tree_map <T extends Comparable<T>, V> implements ITreeMap<T,V> {
             return value;
         }
     }
-
 }
