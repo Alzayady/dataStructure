@@ -1,5 +1,4 @@
 package REDBLACKTREE;
-
 import javax.management.RuntimeErrorException;
 import java.util.*;
 
@@ -19,13 +18,13 @@ public class tree_map <T extends Comparable<T>, V> implements ITreeMap<T,V> {
 
         if(!position.isNull()){
 
-            return new map_entry<T,V>(position);
+            return new AbstractMap.SimpleEntry<T,V>(position.getKey(),position.getValue());
         }
         while (!position.isNull()&&i_am_left_child(position)){
             position=position.getParent();
         }
         if(position.isNull())return null;
-        return new map_entry<>(position.getParent());
+        return new AbstractMap.SimpleEntry<>(position.getParent().getKey(),position.getParent().getValue());
     }
 
     @Override
@@ -53,20 +52,19 @@ public class tree_map <T extends Comparable<T>, V> implements ITreeMap<T,V> {
 
     @Override
     public Set<Map.Entry<T, V>> entrySet() {
-
-        Set<Map.Entry<T,V>> elements=new HashSet<>();
+        Set<Map.Entry<T,V>> elements=new LinkedHashSet<>();
         Stack<INode<T,V>> stack=new Stack<>();
         INode<T,V>node = redBlackTree.getRoot();
-        while (!node.isNull()&&!stack.empty()){
+        while (!node.isNull()||!stack.empty()){
 
-            while (node.isNull()){
+            while (!node.isNull()){
                 stack.push(node);
                 node=node.getLeftChild();
             }
             node=stack.peek();
             stack.pop();
-
-            elements.add(new map_entry<>(node));
+            if(!node.isNull())
+            elements.add(new AbstractMap.SimpleEntry<>(node.getKey(),node.getValue()));
             node=node.getRightChild();
         }
 
@@ -78,7 +76,7 @@ public class tree_map <T extends Comparable<T>, V> implements ITreeMap<T,V> {
         if(redBlackTree.isEmpty())return null;
         INode<T,V>node=redBlackTree.getRoot();
         while (!node.getLeftChild().isNull())node=node.getLeftChild();
-        return new map_entry<>(node);
+        return new AbstractMap.SimpleEntry<>(node.getKey(),node.getValue());
     }
 
     @Override
@@ -92,17 +90,17 @@ public class tree_map <T extends Comparable<T>, V> implements ITreeMap<T,V> {
     public Map.Entry<T, V> floorEntry(T key) {
         check_parameter(key);
         INode<T,V> position=get_position(key);
-        if(!position.isNull())return new map_entry<>(position);
+        if(!position.isNull())return new AbstractMap.SimpleEntry<>(position.getKey(),position.getValue());
         while (!position.isNull()&&!i_am_left_child(position)){
             position=position.getParent();
         }
         if(position.isNull())return null;
-        return new map_entry<>(position.getParent());
+        return new AbstractMap.SimpleEntry<>(position.getParent().getKey(),position.getParent().getValue());
     }
 
     @Override
     public T floorKey(T key) {
-        map_entry<T,V>temp=(map_entry<T, V>) floorEntry(key);
+        AbstractMap.SimpleEntry<T,V>temp=(AbstractMap.SimpleEntry<T, V>) floorEntry(key);
         if(temp==null)return null;
         return temp.getKey();
     }
@@ -140,21 +138,30 @@ public class tree_map <T extends Comparable<T>, V> implements ITreeMap<T,V> {
             stack.pop();
             if(node.getKey().compareTo(toKey)<0||(inclusive&&node.getKey().compareTo(toKey)<=0))
 
-            elements.add(new map_entry<>(node));
+            elements.add(new AbstractMap.SimpleEntry<>(node.getKey(),node.getValue()));
             node=node.getRightChild();
         }
-
         return elements;
-
     }
 
     @Override
     public Set<T> keySet() {
-        Set<Map.Entry<T,V>>elements=entrySet();
-        Set<T>keys=new HashSet<>();
-        for(Map.Entry<T,V> element : elements)
-            keys.add(element.getKey());
-        return keys;
+        Set<T> elements=new LinkedHashSet<>();
+        Stack<INode<T,V>> stack=new Stack<>();
+        INode<T,V>node = redBlackTree.getRoot();
+        while (!node.isNull()||!stack.empty()){
+            while (!node.isNull()){
+                stack.push(node);
+                node=node.getLeftChild();
+            }
+            node=stack.peek();
+            stack.pop();
+            if(!node.isNull())
+                elements.add(node.getKey());
+            node=node.getRightChild();
+        }
+
+        return elements;
     }
 
     @Override
@@ -162,7 +169,7 @@ public class tree_map <T extends Comparable<T>, V> implements ITreeMap<T,V> {
         INode<T,V>root=redBlackTree.getRoot();
         if(root.isNull())return null;
         while (!root.getRightChild().isNull())root=root.getRightChild();
-        return new map_entry<>(root);
+        return new AbstractMap.SimpleEntry<>(root.getKey(),root.getValue());
     }
 
     @Override
@@ -235,7 +242,6 @@ public class tree_map <T extends Comparable<T>, V> implements ITreeMap<T,V> {
     }
 
 
-
     private boolean dfs(INode<T,V> node , V value) {
         if(node.isNull())return false;
         if(node.getValue().equals(value))return true;
@@ -272,29 +278,4 @@ public class tree_map <T extends Comparable<T>, V> implements ITreeMap<T,V> {
         if(param1==null) throw new RuntimeErrorException(new Error());
     }
 
-    private class map_entry<T extends Comparable<T>, V> implements Map.Entry<T, V> {
-        private T key;
-        private V value;
-
-        public map_entry(INode<T, V> node) {
-            this.value=node.getValue();
-            this.key=node.getKey();
-        }
-
-        @Override
-        public T getKey() {
-            return key;
-        }
-
-        @Override
-        public V getValue() {
-            return value;
-        }
-
-        @Override
-        public V setValue(V value) {
-            this.value=value;
-            return value;
-        }
-    }
 }

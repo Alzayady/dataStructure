@@ -122,6 +122,16 @@ public class Fixing_Tree <T extends Comparable<T>, V>  {
             grad_father.setRightChild(sibling);
         sibling.setParent(grad_father);
     }
+    public void make_straight_left(INode<T,V> node){
+        INode<T,V> child = node.getRightChild();
+        RedBlackTree.swap_nodes(node,child);
+        node.setRightChild(child.getRightChild());
+        child.getRightChild().setParent(node);
+        INode<T,V> empty=new Null_Node<>();
+        child.setRightChild(empty);
+        empty.setParent(child);
+        node.setLeftChild(child);
+    }
 
     public boolean I_AM_LEFT_CHILD(INode<T,V> root_node) {
         return root_node.getParent().getLeftChild()==root_node;

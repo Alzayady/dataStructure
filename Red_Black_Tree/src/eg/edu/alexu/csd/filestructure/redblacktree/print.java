@@ -38,12 +38,12 @@ public class print
                     next.add(null);
                     next.add(null);
                 } else {
-                    System.out.println("=======================");
-                    System.out.println(n.getValue());
-                    System.out.println("parent  "+n.getParent());
-                    System.out.println("left  "+n.getLeftChild());
-                    System.out.println("right  "+n.getRightChild());
-                    System.out.println("================");
+//                    System.out.println("=======================");
+//                    System.out.println(n.getValue());
+//                    System.out.println("parent  "+n.getParent());
+//                    System.out.println("left  "+n.getLeftChild());
+//                    System.out.println("right  "+n.getRightChild());
+//                    System.out.println("================");
                     String aa = (n.getValue().toString())+(n.getColor()?"(R)":"(B)");
                     line.add(aa);
                     if (aa.length() > widest) widest = aa.length();

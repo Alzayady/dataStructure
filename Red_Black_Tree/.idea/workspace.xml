@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="569c90dc-7ea3-4266-8889-67c3ff3f1cc4" name="Default Changelist" comment="" />
+    <list default="true" id="569c90dc-7ea3-4266-8889-67c3ff3f1cc4" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/red/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/red/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/red/REDBLACKTREE/tree_map$map_entry.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/red/REDBLACKTREE/tree_map.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/red/REDBLACKTREE/tree_map.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/REDBLACKTREE/Fixing_Tree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/REDBLACKTREE/Fixing_Tree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/REDBLACKTREE/chain_deletion/Deletion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/REDBLACKTREE/chain_deletion/Deletion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/REDBLACKTREE/chain_deletion/Left_left_deletion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/REDBLACKTREE/chain_deletion/Left_left_deletion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/REDBLACKTREE/chain_insertion/Left_right_insertion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/REDBLACKTREE/chain_insertion/Left_right_insertion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/REDBLACKTREE/tree_map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/REDBLACKTREE/tree_map.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/eg/edu/alexu/csd/filestructure/redblacktree/print.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/eg/edu/alexu/csd/filestructure/redblacktree/print.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,6 +31,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectId" id="1aJ9jbRgHdtnHqZ9ilH8W1FrGQM" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -29,9 +42,13 @@
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.import" />
   </component>
   <component name="RecentsManager">
@@ -46,36 +63,6 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="red" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="IntegrationTest (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="red" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="eg.edu.alexu.csd.filestructure.redblacktree.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="eg.edu.alexu.csd.filestructure.redblacktree" />
-      <option name="MAIN_CLASS_NAME" value="eg.edu.alexu.csd.filestructure.redblacktree.IntegrationTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="IntegrationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="red" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="eg.edu.alexu.csd.filestructure.redblacktree.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="REDBLACKTREE" />
-      <option name="MAIN_CLASS_NAME" value="REDBLACKTREE.IntegrationTest" />
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -95,7 +82,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UnitTest.testRootNull" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UnitTest.testEntrySet" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="red" />
       <extension name="coverage">
         <pattern>
@@ -105,7 +92,39 @@
       </extension>
       <option name="PACKAGE_NAME" value="eg.edu.alexu.csd.filestructure.redblacktree" />
       <option name="MAIN_CLASS_NAME" value="eg.edu.alexu.csd.filestructure.redblacktree.UnitTest" />
-      <option name="METHOD_NAME" value="testRootNull" />
+      <option name="METHOD_NAME" value="testEntrySet" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UnitTest.testKeySet" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="red" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="eg.edu.alexu.csd.filestructure.redblacktree.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="eg.edu.alexu.csd.filestructure.redblacktree" />
+      <option name="MAIN_CLASS_NAME" value="eg.edu.alexu.csd.filestructure.redblacktree.UnitTest" />
+      <option name="METHOD_NAME" value="testKeySet" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UnitTest.testLastEntry" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="red" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="eg.edu.alexu.csd.filestructure.redblacktree.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="eg.edu.alexu.csd.filestructure.redblacktree" />
+      <option name="MAIN_CLASS_NAME" value="eg.edu.alexu.csd.filestructure.redblacktree.UnitTest" />
+      <option name="METHOD_NAME" value="testLastEntry" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -113,18 +132,18 @@
     </configuration>
     <list>
       <item itemvalue="Application.Main" />
-      <item itemvalue="JUnit.IntegrationTest" />
       <item itemvalue="JUnit.UnitTest (1)" />
-      <item itemvalue="JUnit.IntegrationTest (1)" />
-      <item itemvalue="JUnit.UnitTest.testRootNull" />
+      <item itemvalue="JUnit.UnitTest.testLastEntry" />
+      <item itemvalue="JUnit.UnitTest.testKeySet" />
+      <item itemvalue="JUnit.UnitTest.testEntrySet" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.UnitTest (1)" />
-        <item itemvalue="JUnit.UnitTest.testRootNull" />
-        <item itemvalue="JUnit.IntegrationTest (1)" />
-        <item itemvalue="JUnit.IntegrationTest" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.UnitTest.testKeySet" />
+        <item itemvalue="JUnit.UnitTest.testEntrySet" />
+        <item itemvalue="JUnit.UnitTest.testLastEntry" />
       </list>
     </recent_temporary>
   </component>
@@ -156,6 +175,8 @@
       <workItem from="1586498923978" duration="49991000" />
       <workItem from="1586590117501" duration="45415000" />
       <workItem from="1586691602673" duration="13673000" />
+      <workItem from="1586784942463" duration="5425000" />
+      <workItem from="1586840014188" duration="2499000" />
     </task>
     <servers />
   </component>
@@ -191,46 +212,46 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="155" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1586720325717" />
-    <state width="1493" height="104" key="GridCell.Tab.0.bottom" timestamp="1586721020990">
+    <state width="1493" height="287" key="GridCell.Tab.0.bottom" timestamp="1586842522381">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="104" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1586721020990" />
-    <state width="1493" height="104" key="GridCell.Tab.0.center" timestamp="1586721020990">
+    <state width="1493" height="287" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1586842522381" />
+    <state width="1493" height="287" key="GridCell.Tab.0.center" timestamp="1586842522381">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="104" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1586721020990" />
-    <state width="1493" height="104" key="GridCell.Tab.0.left" timestamp="1586721020990">
+    <state width="1493" height="287" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1586842522381" />
+    <state width="1493" height="287" key="GridCell.Tab.0.left" timestamp="1586842522381">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="104" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1586721020990" />
-    <state width="1493" height="104" key="GridCell.Tab.0.right" timestamp="1586721020990">
+    <state width="1493" height="287" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1586842522381" />
+    <state width="1493" height="287" key="GridCell.Tab.0.right" timestamp="1586842522381">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="104" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1586721020990" />
-    <state width="1493" height="104" key="GridCell.Tab.1.bottom" timestamp="1586721020991">
+    <state width="1493" height="287" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1586842522381" />
+    <state width="1493" height="251" key="GridCell.Tab.1.bottom" timestamp="1586842036523">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="104" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1586721020991" />
-    <state width="1493" height="104" key="GridCell.Tab.1.center" timestamp="1586721020991">
+    <state width="1493" height="251" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1586842036523" />
+    <state width="1493" height="251" key="GridCell.Tab.1.center" timestamp="1586842036523">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="104" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1586721020991" />
-    <state width="1493" height="104" key="GridCell.Tab.1.left" timestamp="1586721020990">
+    <state width="1493" height="251" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1586842036523" />
+    <state width="1493" height="251" key="GridCell.Tab.1.left" timestamp="1586842036523">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="104" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1586721020990" />
-    <state width="1493" height="104" key="GridCell.Tab.1.right" timestamp="1586721020991">
+    <state width="1493" height="251" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1586842036523" />
+    <state width="1493" height="251" key="GridCell.Tab.1.right" timestamp="1586842036523">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="104" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1586721020991" />
-    <state x="277" y="56" key="SettingsEditor" timestamp="1586636869550">
+    <state width="1493" height="251" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1586842036523" />
+    <state x="277" y="0" key="SettingsEditor" timestamp="1586801454997">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="277" y="56" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1586636869550" />
-    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1586784772555">
+    <state x="277" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1586801454997" />
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1586840006101">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1586784772555" />
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1586840006101" />
     <state x="498" y="306" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1586442999123">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -245,7 +266,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>2</line>
+          <line>9</line>
           <option name="timeStamp" value="83" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -270,13 +291,67 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/REDBLACKTREE/tree_map.java</url>
-          <line>128</line>
+          <line>126</line>
           <option name="timeStamp" value="111" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>1</line>
           <option name="timeStamp" value="114" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/eg/edu/alexu/csd/filestructure/redblacktree/UnitTest.java</url>
+          <line>1359</line>
+          <option name="timeStamp" value="116" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/eg/edu/alexu/csd/filestructure/redblacktree/UnitTest.java</url>
+          <line>938</line>
+          <option name="timeStamp" value="118" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Main.java</url>
+          <line>29</line>
+          <option name="timeStamp" value="121" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/REDBLACKTREE/RedBlackTree.java</url>
+          <line>69</line>
+          <option name="timeStamp" value="122" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/REDBLACKTREE/RedBlackTree.java</url>
+          <line>55</line>
+          <option name="timeStamp" value="123" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/REDBLACKTREE/RedBlackTree.java</url>
+          <line>75</line>
+          <option name="timeStamp" value="124" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/REDBLACKTREE/RedBlackTree.java</url>
+          <line>80</line>
+          <option name="timeStamp" value="125" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/REDBLACKTREE/chain_insertion/Left_right_insertion.java</url>
+          <line>25</line>
+          <option name="timeStamp" value="126" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Main.java</url>
+          <line>26</line>
+          <option name="timeStamp" value="127" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/REDBLACKTREE/Fixing_Tree.java</url>
+          <line>98</line>
+          <option name="timeStamp" value="128" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/REDBLACKTREE/chain_insertion/Insertion.java</url>
+          <line>22</line>
+          <option name="timeStamp" value="129" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/eg/edu/alexu/csd/filestructure/redblacktree/UnitTest.java</url>
@@ -325,6 +400,14 @@
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="113" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/eg/edu/alexu/csd/filestructure/redblacktree/UnitTest.java</url>
+          <line>1357</line>
+          <properties class="eg.edu.alexu.csd.filestructure.redblacktree.UnitTest" method="testKeySet">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="119" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -23,8 +23,8 @@ public class Left_right_insertion<T extends Comparable<T>, V> extends Insertion 
         INode<T,V>red_node=root_node.getLeftChild();
         INode<T,V> sec_red_node=red_node.getRightChild();
 
-
-
+//          fixing_tree.make_straight_left(red_node);
+//          fixing_tree.right_Rotation(root_node);
         fixing_tree.swap_parent(root_node,sec_red_node);
 
         INode<T,V> temp_left=sec_red_node.getLeftChild();

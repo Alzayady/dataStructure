@@ -11,7 +11,6 @@ public class Left_left_deletion  <T extends Comparable<T>, V> extends Deletion<T
 
     @Override
    public void fix(INode<T, V> bad_node) {
-
         if(!my_type((bad_node))){
             next.fix(bad_node);
             return;
