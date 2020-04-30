@@ -68,14 +68,14 @@ public class TestRunner {
 			buffer.append("\t\t\tError: " + e);
 		if (Debug) {
 			for (StackTraceElement trace : e.getStackTrace()) {
-				buffer.append("\n" + trace.getClassName() + "." + trace.getMethodName() + "(): Line "
+				buffer.append("\n" + trace.getClassName() + "" + trace.getMethodName() + "(): Line "
 						+ trace.getLineNumber());
 			}
 		} else {
 			if (implementation != null) {
 				for (StackTraceElement trace : e.getStackTrace()) {
 					if (trace.getClassName().equals(implementation.getName())) {
-						buffer.append("\n" + trace.getClassName() + "." + trace.getMethodName() + "(): Line "
+						buffer.append("\n" + trace.getClassName() + "" + trace.getMethodName() + "(): Line "
 								+ trace.getLineNumber());
 					}
 				}

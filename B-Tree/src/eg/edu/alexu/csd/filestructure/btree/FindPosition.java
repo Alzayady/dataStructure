@@ -1,10 +1,12 @@
 package eg.edu.alexu.csd.filestructure.btree;
 
+import eg.edu.alexu.csd.filestructure.btree.IBTreeNode;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
 
-public class FindPosition<K extends Comparable<K>, V>  {
+class FindPosition<K extends Comparable<K>, V>  {
     private Stack<IBTreeNode<K,V>>track;
     private boolean exist=false;
     private K key;

@@ -1,28 +1,16 @@
 package eg.edu.alexu.csd.filestructure.btree;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Queue;
 import java.util.Random;
-import java.util.Set;
-import java.util.TreeMap;
 import java.util.TreeSet;
 
 import javax.management.RuntimeErrorException;
-import javax.naming.directory.SearchResult;
 
-import org.hamcrest.core.IsInstanceOf;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -583,7 +571,7 @@ public class UnitTest {
 
 			for (int i = 0; i < rndNum.size(); i++) {
 				Assert.assertTrue(btree.delete(rndNum.get(i)));
-				Assert.assertTrue(verifyBTree(root, 0, getHeight(root), 5, root));
+				Assert.assertTrue(verifyBTree(root, 0, getHeight(root), 5, root));				
 			}
 
 
@@ -653,54 +641,43 @@ public class UnitTest {
 		} catch (Throwable e) {
 			TestRunner.fail("Fail to delete in tree", e);
 		}
-	}
-//
-//	/**
-//	 * Test deletion complex case 3.
-//	 */
+	}	
+
+	/**
+	 * Test deletion complex case 3.
+	 */
 	@SuppressWarnings("unchecked")
 	@Test
 	public void testDeletionComplex3() {
 
+		IBTree<Integer, String> btree = (IBTree<Integer, String>) TestRunner.getImplementationInstanceForInterface(IBTree.class, new Object[]{3});
 
-		//while (true) {
-
-
-			IBTree<Integer, String> btree = (IBTree<Integer, String>) TestRunner.getImplementationInstanceForInterface(IBTree.class, new Object[]{3});
-
-			try {
-				Random r = new Random();
-				TreeSet<Integer> set = new TreeSet<>();
-				HashSet<Integer> deleteSet = new HashSet<>();
-				System.out.println("===============");
-				for (int i = 0; i < 100000; i++) {
-					int key = r.nextInt(Integer.MAX_VALUE);
-					//System.out.println(key);
-
-					btree.insert(key, "Soso" + key);
-					set.add(key);
-					if (r.nextInt(5) % 4 == 0 ) deleteSet.add(key);
-				}
-				List<Integer> keys = new ArrayList<>();
-				List<String> vals = new ArrayList<>();
-				traverseTreeInorder(btree.getRoot(), keys, vals);
-				if (keys.size() != set.size())
-					Assert.fail();
-
-				for (Integer i : deleteSet) {
-					//	System.out.println("delete " + i );
-					Assert.assertTrue(btree.delete(i));
-					Assert.assertNull(btree.search(i));
-				}
-				//System.out.println("out");
-				System.out.println(btree.getRoot());
-				if (!verifyBTree(btree.getRoot(), 0, getHeight(btree.getRoot()), 3, btree.getRoot()))
-					Assert.fail();
-
-			} catch (Throwable e) {
-				TestRunner.fail("Fail to search in tree", e);
+		try {
+			Random r = new Random();
+			TreeSet<Integer> set = new TreeSet<>();
+			HashSet<Integer> deleteSet = new HashSet<>();
+			for (int i = 0; i < 100000; i++) {
+				int key = r.nextInt(Integer.MAX_VALUE);
+				btree.insert(key, "Soso" + key);
+				set.add(key);
+				if (r.nextInt(5) % 4 == 0) deleteSet.add(key);
 			}
-	//	}
+			List<Integer> keys = new ArrayList<>();
+			List<String> vals = new ArrayList<>();
+			traverseTreeInorder(btree.getRoot(), keys, vals);
+			if (keys.size() != set.size())
+				Assert.fail();
+
+			for (Integer i : deleteSet) {
+				Assert.assertTrue(btree.delete(i));
+				Assert.assertNull(btree.search(i));
+			}
+			if(!verifyBTree(btree.getRoot(), 0, getHeight(btree.getRoot()), 3, btree.getRoot()))
+				Assert.fail();
+
+		} catch (Throwable e) {
+			TestRunner.fail("Fail to search in tree", e);
+		}
 	}
 
 	/**
@@ -732,7 +709,7 @@ public class UnitTest {
 	@Test
 	public void testindexWebPageNullorEmptyorNotFoundParamter() {
 
-		ISearchEngine searchEngine = (ISearchEngine) TestRunner.getImplementationInstanceForInterface(ISearchEngine.class, new Object[]{100});
+		ISearchEngine searchEngine = new SearchEngine();
 
 		try {
 			searchEngine.indexWebPage(null);
@@ -756,358 +733,370 @@ public class UnitTest {
 	/**
 	 * Test index web page.
 	 */
-//	@Test
-//	public void testindexWebPage() {
-//
-//		ISearchEngine searchEngine = (ISearchEngine) TestRunner.getImplementationInstanceForInterface(ISearchEngine.class, new Object[]{100});
-//		/**
-//		 * This test should be modified according to the testing file and the search query.
-//		 * You should test your implementation against cases including:
-//		 * 1- word that does not exist in tree.
-//		 * 2- word exists.
-//		 * 3- lower case, upper case, mix btw lower and upper, e.g.. THE, the, ThE, tHE....
-//		 * According to each change you should modify the expected variable to have the expected outcome.
-//		 */
-//		try {
-//			searchEngine.indexWebPage("res\\wiki_00");
-//			List<ISearchResult> expected = Arrays.asList(new SearchResult[]{new SearchResult("7697605", 1), new SearchResult("7697611", 8)});
-//			List<ISearchResult> actual = searchEngine.searchByWordWithRanking("THISISTESTWord");
-//			for (ISearchResult searchRes : actual) {
-//				System.out.println(searchRes.toString());
-//			}
-//			Collections.sort(actual, new Comparator<ISearchResult>() {
-//				@Override
-//				public int compare(ISearchResult o1, ISearchResult o2) {
-//					return o1.getRank() - o2.getRank();
-//				}
-//			});
-//
-//			for (int i = 0; i < expected.size(); i++) {
-//				Assert.assertEquals(expected.get(i).getId(), actual.get(i).getId());
-//				Assert.assertEquals(expected.get(i).getRank(), actual.get(i).getRank());
-//			}
-//		} catch (Throwable e) {
-//			TestRunner.fail("Fail to index web page", e);
-//		}
-//	}
-//
-//
-//	/**
-//	 * Test index web directory with null or empty parameter or not found directory.
-//	 */
-//	@Test
-//	public void testindexWebDirectoryNullorEmptyorNotFoundParamter() {
-//
-//		ISearchEngine searchEngine = (ISearchEngine) TestRunner.getImplementationInstanceForInterface(ISearchEngine.class, new Object[]{100});
-//
-//		try {
-//			searchEngine.indexDirectory(null);
-//			Assert.fail();
-//		} catch (RuntimeErrorException ex) {
-//			try {
-//				searchEngine.indexDirectory("");
-//				Assert.fail();
-//			} catch (RuntimeErrorException ex1) {
-//				try {
-//					searchEngine.indexDirectory("koko");
-//				} catch (RuntimeErrorException ex2) {
-//				}
-//			}
-//		}
-//		catch (Throwable e) {
-//			TestRunner.fail("Fail to index directory", e);
-//		}
-//	}
-//
-//	/**
-//	 * Test index directory.
-//	 */
-////	@Test
-////	public void testindexDirectorySimple() {
-////
-////		ISearchEngine searchEngine = (ISearchEngine) TestRunner.getImplementationInstanceForInterface(ISearchEngine.class, new Object[]{100});
-////		/**
-////		 * This test should be modified according to the testing directory and the search query.
-////		 * You should make sure that the test can support multiple file in the same directory.
-////		 * You should test your implementation against cases including:
-////		 * 1- word that does not exist in tree.
-////		 * 2- word exists.
-////		 * 3- lower case, upper case, mix btw lower and upper, e.g.. THE, the, ThE, tHE....
-////		 * According to each change you should modify the expected variable to have the expected outcome.
-////		 */
-////		try {
-////			searchEngine.indexDirectory("res");
-////			List<ISearchResult> expected = Arrays.asList(new SearchResult[]{new SearchResult("7697605", 1), new SearchResult("7702780", 3), new SearchResult("7697611", 8)});
-////			List<ISearchResult> actual = searchEngine.searchByWordWithRanking("THISISTESTWord");
-////			for (ISearchResult searchRes : actual) {
-////				System.out.println(searchRes.toString());
-////			}
-////			Collections.sort(actual, new Comparator<ISearchResult>() {
-////				@Override
-////				public int compare(ISearchResult o1, ISearchResult o2) {
-////					return o1.getRank() - o2.getRank();
-////				}
-////			});
-////
-////			for (int i = 0; i < expected.size(); i++) {
-////				Assert.assertEquals(expected.get(i).getId(), actual.get(i).getId());
-////				Assert.assertEquals(expected.get(i).getRank(), actual.get(i).getRank());
-////			}
-////		} catch (Throwable e) {
-////			TestRunner.fail("Fail to index directory", e);
-////		}
-////	}
-//
-//	/**
-//	 * Test index directory complex.
-//	 */
-////	@Test
-////	public void testindexWebDirectoryComplex() {
-////
-////		ISearchEngine searchEngine = (ISearchEngine) TestRunner.getImplementationInstanceForInterface(ISearchEngine.class, new Object[]{100});
-////		/**
-////		 * This test should be modified according to the testing directory and the search query.
-////		 * You should make sure that the test can support multiple file in the same directory
-////		 * or nested directory up to multiple level.
-////		 * You should test your implementation against cases including:
-////		 * 1- word that does not exist in tree.
-////		 * 2- word exists.
-////		 * 3- lower case, upper case, mix btw lower and upper, e.g.. THE, the, ThE, tHE....
-////		 * According to each change you should modify the expected variable to have the expected outcome.
-////		 */
-////		try {
-////			searchEngine.indexDirectory("res");
-////			List<ISearchResult> expected = Arrays.asList(new SearchResult[]{new SearchResult("7712144", 1), new SearchResult("7708196", 2)});
-////			List<ISearchResult> actual = searchEngine.searchByWordWithRanking("THISIStESTWORDFORSUBFOLDER");
-////			for (ISearchResult searchRes : actual) {
-////				System.out.println(searchRes.toString());
-////			}
-////			Collections.sort(actual, new Comparator<ISearchResult>() {
-////				@Override
-////				public int compare(ISearchResult o1, ISearchResult o2) {
-////					return o1.getRank() - o2.getRank();
-////				}
-////			});
-////
-////			for (int i = 0; i < expected.size(); i++) {
-////				Assert.assertEquals(expected.get(i).getId(), actual.get(i).getId());
-////				Assert.assertEquals(expected.get(i).getRank(), actual.get(i).getRank());
-////			}
-////		} catch (Throwable e) {
-////			TestRunner.fail("Fail to index directory", e);
-////		}
-////	}
-////
-//	/**
-//	 * Test delete web page with null or empty parameter or not found.
-//	 */
-//	@Test
-//	public void testDeleteWebPageNullorEmptyorNotFoundParamter() {
-//
-//		ISearchEngine searchEngine = (ISearchEngine) TestRunner.getImplementationInstanceForInterface(ISearchEngine.class, new Object[]{100});
-//
-//		try {
-//			searchEngine.deleteWebPage(null);
-//			Assert.fail();
-//		} catch (RuntimeErrorException ex) {
-//			try {
-//				searchEngine.deleteWebPage("");
-//				Assert.fail();
-//			} catch (RuntimeErrorException ex1) {
-//				try {
-//					searchEngine.deleteWebPage("koko");
-//				} catch (RuntimeErrorException ex2) {
-//				}
-//			}
-//		}
-//		catch (Throwable e) {
-//			TestRunner.fail("Fail to delete web page", e);
-//		}
-//	}
-//
-//	/**
-//	 * Test delete web page complex.
-//	 */
-////	@Test
-////	public void testDeleteWebPageSimple() {
-////
-////		ISearchEngine searchEngine = (ISearchEngine) TestRunner.getImplementationInstanceForInterface(ISearchEngine.class, new Object[]{100});
-////		/**
-////		 * This test should be modified according to the testing directory and the search query.
-////		 * You should make sure that the test can support multiple file in the same directory.
-////		 * You should test your implementation against cases including:
-////		 * 1- word that does not exist in tree.
-////		 * 2- word exists.
-////		 * 3- lower case, upper case, mix btw lower and upper, e.g.. THE, the, ThE, tHE....
-////		 * According to each change you should modify the expected variable to have the expected outcome.
-////		 */
-////		try {
-////			searchEngine.indexDirectory("res");
-////			searchEngine.deleteWebPage("res\\wiki_00");
-////			List<ISearchResult> expected = Arrays.asList(new SearchResult[]{new SearchResult("7702780", 1)});
-////			List<ISearchResult> actual = searchEngine.searchByWordWithRanking("DELETEWORD");
-////			for (ISearchResult searchRes : actual) {
-////				System.out.println(searchRes.toString());
-////			}
-////			Collections.sort(actual, new Comparator<ISearchResult>() {
-////				@Override
-////				public int compare(ISearchResult o1, ISearchResult o2) {
-////					return o1.getRank() - o2.getRank();
-////				}
-////			});
-////			for (int i = 0; i < expected.size(); i++) {
-////				Assert.assertEquals(expected.get(i).getId(), actual.get(i).getId());
-////				Assert.assertEquals(expected.get(i).getRank(), actual.get(i).getRank());
-////			}
-////		} catch (Throwable e) {
-////			TestRunner.fail("Fail to delete web page", e);
-////		}
-////	}
-//
-//	/**
-//	 * Test delete unindexed web page.
-//	 */
-////	@Test
-////	public void testDeleteWebPageUnIndexedWebPage() {
-////
-////		ISearchEngine searchEngine = (ISearchEngine) TestRunner.getImplementationInstanceForInterface(ISearchEngine.class, new Object[]{100});
-////		/**
-////		 * This test should be modified according to the testing directory and the search query.
-////		 * You should make sure that the test can support multiple file in the same directory.
-////		 * You should test your implementation against cases including:
-////		 * 1- word that does not exist in tree.
-////		 * 2- word exists.
-////		 * 3- lower case, upper case, mix btw lower and upper, e.g.. THE, the, ThE, tHE....
-////		 * According to each change you should modify the expected variable to have the expected outcome.
-////		 */
-////		try {
-////			searchEngine.indexWebPage("res\\wiki_00");
-////			searchEngine.indexWebPage("res\\subfolder\\wiki_02");
-////			searchEngine.deleteWebPage("res\\wiki_01");
-////			List<ISearchResult> expected = Arrays.asList(new SearchResult[]{new SearchResult("7697611", 1)});
-////			List<ISearchResult> actual = searchEngine.searchByWordWithRanking("testDeleteWebPageUnIndexedWebPage");
-////			for (ISearchResult searchRes : actual) {
-////				System.out.println(searchRes.toString());
-////			}
-////			Collections.sort(actual, new Comparator<ISearchResult>() {
-////				@Override
-////				public int compare(ISearchResult o1, ISearchResult o2) {
-////					return o1.getRank() - o2.getRank();
-////				}
-////			});
-////			for (int i = 0; i < expected.size(); i++) {
-////				Assert.assertEquals(expected.get(i).getId(), actual.get(i).getId());
-////				Assert.assertEquals(expected.get(i).getRank(), actual.get(i).getRank());
-////			}
-////		} catch (Throwable e) {
-////			TestRunner.fail("Fail to delete web page", e);
-////		}
-////	}
-//
-//	/**
-//	 * Test delete empty all the indexed web page.
-//	 */
-//	@Test
-//	public void testDeleteAllIndexedWebPage() {
-//
-//		ISearchEngine searchEngine = (ISearchEngine) TestRunner.getImplementationInstanceForInterface(ISearchEngine.class, new Object[]{100});
-//
-//		try {
-//			searchEngine.indexWebPage("res\\wiki_00");
-//			searchEngine.indexWebPage("res\\wiki_01");
-//			searchEngine.indexWebPage("res\\subfolder\\wiki_02");
-//			searchEngine.deleteWebPage("res\\wiki_01");
-//			searchEngine.deleteWebPage("res\\subfolder\\wiki_02");
-//			searchEngine.deleteWebPage("res\\wiki_00");
-//
-//			List<ISearchResult> actual = searchEngine.searchByWordWithRanking("ThE");
-//			Assert.assertEquals(0, actual.size());
-//		} catch (Throwable e) {
-//			TestRunner.fail("Fail to delete web page", e);
-//		}
-//	}
-//
-//	/**
-//	 * Test searchByWordWithRanking with null or empty parameter.
-//	 */
-//	@Test
-//	public void testsearchByWordWithRankingNullorEmptyParamter() {
-//		/**
-//		 * The rest use case of searchByWordWithRanking are covered in the other tests.
-//		 */
-//		ISearchEngine searchEngine = (ISearchEngine) TestRunner.getImplementationInstanceForInterface(ISearchEngine.class, new Object[]{100});
-//
-//		try {
-//			searchEngine.searchByWordWithRanking(null);
-//			Assert.fail();
-//		} catch (RuntimeErrorException ex) {
-//			Assert.assertEquals(0, searchEngine.searchByWordWithRanking("").size());
-//		}
-//		catch (Throwable e) {
-//			TestRunner.fail("Fail to search web page", e);
-//		}
-//	}
-//
-//	/**
-//	 * Test searchByMultipleWordWithRanking with null or empty parameter.
-//	 */
-//	@Test
-//	public void testsearchByMultipleWordWithRankingNullorEmptyParamter() {
-//		/**
-//		 * The rest use case of searchByWordWithRanking are covered in the other tests.
-//		 */
-//		ISearchEngine searchEngine = (ISearchEngine) TestRunner.getImplementationInstanceForInterface(ISearchEngine.class, new Object[]{100});
-//
-//		try {
-//			searchEngine.searchByMultipleWordWithRanking(null);
-//			Assert.fail();
-//		} catch (RuntimeErrorException ex) {
-//			Assert.assertEquals(0, searchEngine.searchByMultipleWordWithRanking("").size());
-//		}
-//		catch (Throwable e) {
-//			TestRunner.fail("Fail to search web page", e);
-//		}
-//	}
-//
-//	/**
-//	 * Test searchByMultipleWordWithRanking cases.
-//	 */
-////	@SuppressWarnings("unchecked")
-////	@Test
-////	public void testsearchByMultipleWordWithRanking() {
-////
-////		ISearchEngine searchEngine = (ISearchEngine) TestRunner.getImplementationInstanceForInterface(ISearchEngine.class, new Object[]{100});
-////		/**
-////		 * This test should be modified according to the testing directory and the search query.
-////		 * You should make sure that the test can support multiple file in the same directory
-////		 * or nested directory up to multiple level.
-////		 * You should test your implementation against cases including:
-////		 * 1- multiple words with different cases that exists in the tree. e.g ThE sKy is bLuE, .... (Check that the rank is the min)
-////		 * 2- multiple words with some of them not in the tree.
-////		 * According to each change you should modify the expected variable to have the expected outcome.
-////		 */
-////		try {
-////			searchEngine.indexDirectory("res");
-////			List<ISearchResult> expected = Arrays.asList(new SearchResult[]{new SearchResult("7702780", 1), new SearchResult("7697611", 3)});
-////			List<ISearchResult> actual = searchEngine.searchByMultipleWordWithRanking(" word1d word2d     word3d 	");
-////			for (ISearchResult searchRes : actual) {
-////				System.out.println(searchRes.toString());
-////			}
-////			Collections.sort(actual, new Comparator<ISearchResult>() {
-////				@Override
-////				public int compare(ISearchResult o1, ISearchResult o2) {
-////					return o1.getRank() - o2.getRank();
-////				}
-////			});
-////
-////			for (int i = 0; i < expected.size(); i++) {
-////				Assert.assertEquals(expected.get(i).getId(), actual.get(i).getId());
-////				Assert.assertEquals(expected.get(i).getRank(), actual.get(i).getRank());
-////			}
-////		} catch (Throwable e) {
-////			TestRunner.fail("Fail to index directory", e);
-////		}
-////	}
+	@Test
+	public void testindexWebPage() {
+
+		ISearchEngine searchEngine = new SearchEngine();
+		/**
+		 * This test should be modified according to the testing file and the search query.
+		 * You should test your implementation against cases including:
+		 * 1- word that does not exist in tree.
+		 * 2- word exists.
+		 * 3- lower case, upper case, mix btw lower and upper, e.g.. THE, the, ThE, tHE....
+		 * According to each change you should modify the expected variable to have the expected outcome.
+		 */
+		try {
+			searchEngine.indexWebPage("res\\wiki_00");
+			List<ISearchResult> expected = Arrays.asList(new SearchResult[]{new SearchResult("7702022", 1), new SearchResult("7697757", 1),new SearchResult("7701215",1),new SearchResult("7702665",1)});
+			List<ISearchResult> actual = searchEngine.searchByWordWithRanking("talks");
+			Collections.sort(actual, new Comparator<ISearchResult>() {
+				@Override
+				public int compare(ISearchResult o1, ISearchResult o2) {
+					return o1.getRank() - o2.getRank();
+				}
+			});
+			for (ISearchResult searchRes : actual) {
+				System.out.println(searchRes.toString());
+			}
+
+
+			for (int i = 0; i < expected.size(); i++) {
+				Assert.assertEquals(expected.get(i).getId(), actual.get(i).getId());
+				Assert.assertEquals(expected.get(i).getRank(), actual.get(i).getRank());
+			}
+		} catch (Throwable e) {
+			TestRunner.fail("Fail to index web page", e);
+		}
+	}
+
+
+	/**
+	 * Test index web directory with null or empty parameter or not found directory.
+	 */
+	@Test
+	public void testindexWebDirectoryNullorEmptyorNotFoundParamter() {
+
+		ISearchEngine searchEngine = new SearchEngine();
+
+		try {
+			searchEngine.indexDirectory(null);
+			Assert.fail();
+		} catch (RuntimeErrorException ex) {
+			try {
+				searchEngine.indexDirectory("");
+				Assert.fail();
+			} catch (RuntimeErrorException ex1) {
+				try {
+					searchEngine.indexDirectory("koko");
+				} catch (RuntimeErrorException ex2) {
+				}
+			}
+		}
+		catch (Throwable e) {
+			TestRunner.fail("Fail to index directory", e);
+		}
+	}
+
+	/**
+	 * Test index directory.
+	 */
+	@Test
+	public void testindexDirectorySimple() {
+
+		ISearchEngine searchEngine = new SearchEngine();
+		/**
+		 * This test should be modified according to the testing directory and the search query.
+		 * You should make sure that the test can support multiple file in the same directory.
+		 * You should test your implementation against cases including:
+		 * 1- word that does not exist in tree.
+		 * 2- word exists.
+		 * 3- lower case, upper case, mix btw lower and upper, e.g.. THE, the, ThE, tHE....
+		 * According to each change you should modify the expected variable to have the expected outcome.
+		 */
+		try {
+			searchEngine.indexDirectory("res\\subfolder");
+			List<ISearchResult> expected = Arrays.asList(new SearchResult[]{new SearchResult("7704775", 1), new SearchResult("7719174", 1), new SearchResult("7720450", 1), new SearchResult("7742474", 1)
+					, new SearchResult("7716778", 2), new SearchResult("7741188", 3), new SearchResult("7711850", 6)});
+			List<ISearchResult> actual = searchEngine.searchByWordWithRanking("dad");
+
+			for (ISearchResult searchRes : actual) {
+				System.out.println(searchRes.toString());
+			}
+			Collections.sort(actual, new Comparator<ISearchResult>() {
+				@Override
+				public int compare(ISearchResult o1, ISearchResult o2) {
+					return o1.getRank() - o2.getRank();
+				}
+			});
+
+
+			for (int i = 0; i < expected.size(); i++) {
+				Assert.assertEquals(expected.get(i).getId(), actual.get(i).getId());
+				Assert.assertEquals(expected.get(i).getRank(), actual.get(i).getRank());
+			}
+		} catch (Throwable e) {
+			TestRunner.fail("Fail to index directory", e);
+		}
+	}
+
+	/**
+	 * Test index directory complex.
+	 */
+	@Test
+	public void testindexWebDirectoryComplex() {
+
+		ISearchEngine searchEngine = new SearchEngine();
+		/**
+		 * This test should be modified according to the testing directory and the search query.
+		 * You should make sure that the test can support multiple file in the same directory 
+		 * or nested directory up to multiple level.
+		 * You should test your implementation against cases including:
+		 * 1- word that does not exist in tree.
+		 * 2- word exists.
+		 * 3- lower case, upper case, mix btw lower and upper, e.g.. THE, the, ThE, tHE....
+		 * According to each change you should modify the expected variable to have the expected outcome.
+		 */
+		try {
+			searchEngine.indexDirectory("res");
+			List<ISearchResult> expected = Arrays.asList();
+			//List<ISearchResult> actual = searchEngine.searchByWordWithRanking("THISIStESTWORDFORSUBFOLDER");
+			List<ISearchResult> actual = searchEngine.searchByWordWithRanking("THISIStESTWORDFORSUBFOLDER");
+			for (ISearchResult searchRes : actual) {
+				System.out.println(searchRes.toString());
+			}
+			Collections.sort(actual, new Comparator<ISearchResult>() {
+				@Override
+				public int compare(ISearchResult o1, ISearchResult o2) {
+					return o1.getRank() - o2.getRank();
+				}
+			});
+
+			for (int i = 0; i < expected.size(); i++) {
+				Assert.assertEquals(expected.get(i).getId(), actual.get(i).getId());
+				Assert.assertEquals(expected.get(i).getRank(), actual.get(i).getRank());
+			}
+		} catch (Throwable e) {
+			TestRunner.fail("Fail to index directory", e);
+		}
+	}
+
+	/**
+	 * Test delete web page with null or empty parameter or not found.
+	 */
+	@Test
+	public void testDeleteWebPageNullorEmptyorNotFoundParamter() {
+
+		ISearchEngine searchEngine = new SearchEngine();
+
+		try {
+			searchEngine.deleteWebPage(null);
+			Assert.fail();
+		} catch (RuntimeErrorException ex) {
+			try {
+				searchEngine.deleteWebPage("");
+				Assert.fail();
+			} catch (RuntimeErrorException ex1) {
+				try {
+					searchEngine.deleteWebPage("koko");
+				} catch (RuntimeErrorException ex2) {
+				}
+			}
+		}
+		catch (Throwable e) {
+			TestRunner.fail("Fail to delete web page", e);
+		}
+	}
+
+	/**
+	 * Test delete web page complex.
+	 */
+	@Test
+	public void testDeleteWebPageSimple() {
+
+		ISearchEngine searchEngine = new SearchEngine();
+		/**
+		 * This test should be modified according to the testing directory and the search query.
+		 * You should make sure that the test can support multiple file in the same directory.
+		 * You should test your implementation against cases including:
+		 * 1- word that does not exist in tree.
+		 * 2- word exists.
+		 * 3- lower case, upper case, mix btw lower and upper, e.g.. THE, the, ThE, tHE....
+		 * According to each change you should modify the expected variable to have the expected outcome.
+		 */
+		try {
+			searchEngine.indexDirectory("res\\subfolder");
+			searchEngine.deleteWebPage("res\\subfolder\\wiki_01");
+			List<ISearchResult> expected = Arrays.asList(new SearchResult[]{ new SearchResult("7719174", 1), new SearchResult("7720450", 1), new SearchResult("7742474", 1)
+					, new SearchResult("7716778", 2), new SearchResult("7741188", 3), new SearchResult("7711850", 6)});
+			List<ISearchResult> actual = searchEngine.searchByWordWithRanking("dad");
+
+			for (ISearchResult searchRes : actual) {
+				System.out.println(searchRes.toString());
+			}
+			Collections.sort(actual, new Comparator<ISearchResult>() {
+				@Override
+				public int compare(ISearchResult o1, ISearchResult o2) {
+					return o1.getRank() - o2.getRank();
+				}
+			});
+
+			for (int i = 0; i < expected.size(); i++) {
+				Assert.assertEquals(expected.get(i).getId(), actual.get(i).getId());
+				Assert.assertEquals(expected.get(i).getRank(), actual.get(i).getRank());
+			}
+		} catch (Throwable e) {
+			TestRunner.fail("Fail to delete web page", e);
+		}
+	}
+
+	/**
+	 * Test delete unindexed web page.
+	 */
+	@Test
+	public void testDeleteWebPageUnIndexedWebPage() {
+
+		ISearchEngine searchEngine = new SearchEngine();
+		/**
+		 * This test should be modified according to the testing directory and the search query.
+		 * You should make sure that the test can support multiple file in the same directory.
+		 * You should test your implementation against cases including:
+		 * 1- word that does not exist in tree.
+		 * 2- word exists.
+		 * 3- lower case, upper case, mix btw lower and upper, e.g.. THE, the, ThE, tHE....
+		 * According to each change you should modify the expected variable to have the expected outcome.
+		 */
+		try {
+			searchEngine.indexWebPage("res\\wiki_00");
+			searchEngine.indexWebPage("res\\subfolder\\wiki_02");
+			searchEngine.deleteWebPage("res\\wiki_01");
+			List<ISearchResult> expected = Arrays.asList(new SearchResult[]{new SearchResult("7712095", 1)});
+			List<ISearchResult> actual = searchEngine.searchByWordWithRanking("quERy");
+
+			Collections.sort(actual, new Comparator<ISearchResult>() {
+				@Override
+				public int compare(ISearchResult o1, ISearchResult o2) {
+					return o1.getRank() - o2.getRank();
+				}
+			});
+			for (ISearchResult searchRes : actual) {
+				System.out.println(searchRes.toString());
+			}
+			for (int i = 0; i < expected.size(); i++) {
+				Assert.assertEquals(expected.get(i).getId(), actual.get(i).getId());
+				Assert.assertEquals(expected.get(i).getRank(), actual.get(i).getRank());
+			}
+		} catch (Throwable e) {
+			TestRunner.fail("Fail to delete web page", e);
+		}
+	}
+
+	/**
+	 * Test delete empty all the indexed web page.
+	 */
+	@Test
+	public void testDeleteAllIndexedWebPage() {
+
+		ISearchEngine searchEngine = new SearchEngine();
+
+		try {
+			searchEngine.indexWebPage("res\\wiki_00");
+			searchEngine.indexWebPage("res\\wiki_01");
+			searchEngine.indexWebPage("res\\subfolder\\wiki_02");
+			searchEngine.deleteWebPage("res\\wiki_01");
+			searchEngine.deleteWebPage("res\\subfolder\\wiki_02");
+			searchEngine.deleteWebPage("res\\wiki_00");
+
+			List<ISearchResult> actual = searchEngine.searchByWordWithRanking("ThE");
+			Assert.assertEquals(0, actual.size());
+		} catch (Throwable e) {
+			TestRunner.fail("Fail to delete web page", e);
+		}
+	}
+
+	/**
+	 * Test searchByWordWithRanking with null or empty parameter.
+	 */
+	@Test
+	public void testsearchByWordWithRankingNullorEmptyParamter() {
+		/**
+		 * The rest use case of searchByWordWithRanking are covered in the other tests.
+		 */
+		ISearchEngine searchEngine = new SearchEngine();
+
+		try {
+			searchEngine.searchByWordWithRanking(null);
+			Assert.fail();
+		} catch (RuntimeErrorException ex) {
+			Assert.assertEquals(0, searchEngine.searchByWordWithRanking("").size());
+		}
+		catch (Throwable e) {
+			TestRunner.fail("Fail to search web page", e);
+		}
+	}
+	
+	/**
+	 * Test searchByMultipleWordWithRanking with null or empty parameter.
+	 */
+	@Test
+	public void testsearchByMultipleWordWithRankingNullorEmptyParamter() {
+		/**
+		 * The rest use case of searchByWordWithRanking are covered in the other tests.
+		 */
+		ISearchEngine searchEngine = new SearchEngine();
+
+		try {
+			searchEngine.searchByMultipleWordWithRanking(null);
+			Assert.fail();
+		} catch (RuntimeErrorException ex) {
+			Assert.assertEquals(0, searchEngine.searchByMultipleWordWithRanking("").size());
+		}
+		catch (Throwable e) {
+			TestRunner.fail("Fail to search web page", e);
+		}
+	}
+
+	/**
+	 * Test searchByMultipleWordWithRanking cases.
+	 */
+	@SuppressWarnings("unchecked")
+	@Test
+	public void testsearchByMultipleWordWithRanking() {
+
+		ISearchEngine searchEngine = new SearchEngine();
+		/**
+		 * This test should be modified according to the testing directory and the search query.
+		 * You should make sure that the test can support multiple file in the same directory 
+		 * or nested directory up to multiple level.
+		 * You should test your implementation against cases including:
+		 * 1- multiple words with different cases that exists in the tree. e.g ThE sKy is bLuE, .... (Check that the rank is the min)
+		 * 2- multiple words with some of them not in the tree.
+		 * According to each change you should modify the expected variable to have the expected outcome.
+		 */
+		try {
+			searchEngine.indexDirectory("res\\subfolder");
+			List<ISearchResult> expected = Arrays.asList(new SearchResult[]{new SearchResult("7742505", 1), new SearchResult("7720574", 1)
+					, new SearchResult("7720531", 1), new SearchResult("7712754", 1), new SearchResult("7730379", 1)
+					, new SearchResult("7722022", 4)});
+			List<ISearchResult> actual = searchEngine.searchByMultipleWordWithRanking("1447   rec wow");
+			for (ISearchResult searchRes : actual) {
+				System.out.println(searchRes.toString());
+			}
+			Collections.sort(actual, new Comparator<ISearchResult>() {
+				@Override
+				public int compare(ISearchResult o1, ISearchResult o2) {
+					return o1.getRank() - o2.getRank();
+				}
+			});
+
+
+			for (int i = 0; i < expected.size(); i++) {
+				Assert.assertEquals(expected.get(i).getId(), actual.get(i).getId());
+				Assert.assertEquals(expected.get(i).getRank(), actual.get(i).getRank());
+			}
+		} catch (Throwable e) {
+			TestRunner.fail("Fail to index directory", e);
+		}
+	}
 	
 	private int getHeight (IBTreeNode<?, ?> node) {
 		if (node.isLeaf()) return 0;

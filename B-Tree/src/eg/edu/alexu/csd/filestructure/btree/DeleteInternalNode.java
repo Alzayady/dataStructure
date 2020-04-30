@@ -1,11 +1,13 @@
 package eg.edu.alexu.csd.filestructure.btree;
 
+import eg.edu.alexu.csd.filestructure.btree.IBTreeNode;
+
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class DeleteInternalNode <K extends Comparable<K>, V>   {
-    private IBTreeNode<K,V>target_node;
+class DeleteInternalNode <K extends Comparable<K>, V>   {
+    private IBTreeNode<K,V> target_node;
     private K deleted_key;
     private IBTreeNode<K,V>predecessor;
     private IBTreeNode<K,V>successor;

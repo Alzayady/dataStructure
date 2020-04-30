@@ -4,7 +4,7 @@ import org.junit.Assert;
 
 import java.util.*;
 
-public class FixingDeletedNode <K extends Comparable<K>, V>{
+class FixingDeletedNode <K extends Comparable<K>, V>{
     private  final int MIN_DEGREE  ;
     private  Stack<IBTreeNode<K, V>> stack;
     private K left_key=null;

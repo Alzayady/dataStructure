@@ -1,9 +1,11 @@
 package eg.edu.alexu.csd.filestructure.btree;
 
+import eg.edu.alexu.csd.filestructure.btree.IBTreeNode;
+
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class DeleteLeafNode <K extends Comparable<K>, V> {
+class DeleteLeafNode <K extends Comparable<K>, V> {
 
     private  int MIN_DEGREE  ;
     private final IBTreeNode<K, V> target_node;

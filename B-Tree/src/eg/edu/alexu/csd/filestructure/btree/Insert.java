@@ -6,9 +6,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
-public class Insert  <K extends Comparable<K>, V>{
+class Insert  <K extends Comparable<K>, V>{
     private int max_size;
-    private IBTreeNode<K,V>node;
+    private IBTreeNode<K,V> node;
     private K key;
     private V value;
     private IBTreeNode<K,V>left;

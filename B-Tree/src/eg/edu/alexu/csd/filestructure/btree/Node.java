@@ -1,10 +1,13 @@
 package eg.edu.alexu.csd.filestructure.btree;
 
+import eg.edu.alexu.csd.filestructure.btree.IBTree;
+import eg.edu.alexu.csd.filestructure.btree.IBTreeNode;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Vector;
 
-public class Node <K extends Comparable<K>, V> implements IBTreeNode<K,V> {
+class Node <K extends Comparable<K>, V> implements IBTreeNode<K,V> {
     private IBTree<K,V> Tree;
     List<K> keys;
     List<V>values;

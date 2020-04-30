@@ -1,77 +1,81 @@
-import eg.edu.alexu.csd.filestructure.btree.BTree;
-import eg.edu.alexu.csd.filestructure.btree.IBTree;
-import eg.edu.alexu.csd.filestructure.btree.IBTreeNode;
-import eg.edu.alexu.csd.filestructure.btree.PrintTree;
-import org.junit.Assert;
+import eg.edu.alexu.csd.filestructure.btree.ISearchEngine;
+import eg.edu.alexu.csd.filestructure.btree.ISearchResult;
+import eg.edu.alexu.csd.filestructure.btree.SearchEngine;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
-import java.util.Arrays;
-import java.util.Iterator;
+import javax.management.RuntimeErrorException;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.File;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Vector;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Main {
-
     public static void main(String[] args) {
-	// write your code here
-        BTree<Integer,String> bTree=new BTree<>(3);
-//        for(int i =0 ; i< 1000000 ; i++){
-//            bTree.insert(i,i);
-//           // PrintTree.print(bTree.getRoot());
-//        }
-        List<Integer> inp = Arrays.asList(new Integer[]{149, 119, 168, 153, 26, 48, 67, 109, 176, 29, 130, 92, 4, 127, 99, 55, 24, 82, 1, 11, 6, 105, 102});
-        for (int i : inp){
-            bTree.insert(i, "Soso" + i);
+        ISearchEngine engine =new SearchEngine();
+        engine.indexWebPage("res\\wiki_00");
+        engine.indexWebPage("res\\subfolder\\wiki_02");
+        engine.deleteWebPage("res\\wiki_01");
+//       while (true){
+//           Scanner scanner=new Scanner(System.in);
+//           String ss =scanner.next();
+
+        List<ISearchResult> results = engine.searchByMultipleWordWithRanking("     query       ");
+        for(ISearchResult searchResult : results){
+            System.out.println(searchResult.getRank()+" "+searchResult.getId());
         }
-
-//        149
-//        119
-//        168
-//        153
-//        26
-//        48
-//        67
-//        109
-//        176
-//        29
-//        130
-//        92
-//        4
-//        127
-//        99
-//        55
-//        24
-//        82
-//        1
-//        11
-//        6
-//        105
-//        102
-
-
-        PrintTree.print(bTree.getRoot());
-        Assert.assertTrue(bTree.delete(48));
-        Assert.assertNull(bTree.search(48));
-        PrintTree.print(bTree.getRoot());
-        Assert.assertTrue(bTree.delete(82));
-        Assert.assertNull(bTree.search(82));
-        PrintTree.print(bTree.getRoot());
-        Assert.assertTrue(bTree.delete(99));
-        Assert.assertNull(bTree.search(99));
-        PrintTree.print(bTree.getRoot());
-        Assert.assertTrue(bTree.delete(149));
-        Assert.assertNull(bTree.search(149));
-        PrintTree.print(bTree.getRoot());
-
-//        System.out.println(bTree.getRoot().getValues());
-//        List<IBTreeNode<Integer,Integer>>ch=bTree.getRoot().getChildren();
-//        Iterator<IBTreeNode<Integer, Integer>> ss=ch.iterator();
-//        while (ss.hasNext()) System.out.println(ss.next().getKeys());
+//        System.out.println("===========");
+//        results = engine.searchByWordWithRanking("194");
+//        for(ISearchResult searchResult : results){
+//            System.out.println(searchResult.getRank()+" "+searchResult.getId());
+//        }
+//        System.out.println("===========");
 //
-//        Vector<Integer>ss=new Vector<>();
-//        ss.add(5);
-//        ss.add(6);
-//        ss.add(7);
-//        ss.add(8);
-//        System.out.println(ss.subList(1,2));
+//        results = engine.searchByWordWithRanking("wow");
+//        for(ISearchResult searchResult : results){
+//            System.out.println(searchResult.getRank()+" "+searchResult.getId());
+//        }  System.out.println("===========");
+//
+//        results = engine.searchByWordWithRanking("rec");
+//        for(ISearchResult searchResult : results){
+//            System.out.println(searchResult.getRank()+" "+searchResult.getId());
+//        }
+//      System.out.println("===========");
+//
+//    results = engine.searchByWordWithRanking("fulltime");
+//        for(ISearchResult searchResult : results){
+//            System.out.println(searchResult.getRank()+" "+searchResult.getId());
+//        }
+//        results = engine.searchByWordWithRanking("die");
+//        for(ISearchResult searchResult : results){
+//            System.out.println(searchResult.getRank()+" "+searchResult.getId());
+//        }
+     //  }
+
+
+}
+    private  static NodeList getListOfElements(String filePath){
+        NodeList nList;
+
+        try {
+            File inputFile = new File(filePath);
+
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(inputFile);
+            doc.getDocumentElement().normalize();
+            nList = doc.getElementsByTagName("doc");
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeErrorException(new Error());
+        }
+        return nList;
     }
+
 }
