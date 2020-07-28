@@ -1,18 +1,19 @@
 struct SegmentTree{
-    vector <long long >  segmentTree;
+    vector <long long>  segmentTree;
     long long *arr;
     int size;
     SegmentTree(int n ) : size(n)
     {
-        segmentTree.resize(1<<20);
+        segmentTree.resize(1<<21);
     }
     SegmentTree( )
     {
-        segmentTree.resize(1<<20);
+        segmentTree.resize(1<<21);
     }
     void setarray(long long *a, int n ){
         arr=a;
         setSize(n);
+        build(1,1,n);
     }
     void setSize(int n){
         size=n;
