@@ -1,0 +1,292 @@
+package eg.edu.alexu.csd.datastructure.linkedList.cs<03>_cs<08>;
+
+public class DLinkedList implements ILinkedList {
+    private DNode head;
+    private DNode tail;
+    private int size = 0;
+    private int cursorIndex = 0;
+    private DNode cursorNode;
+
+    public DLinkedList() {
+        this(null);
+    }
+
+    public DLinkedList(Object obj) {
+        head = new DNode(obj,null,null);
+        tail = new DNode(null,null,head);
+        head.setNext(tail);
+        cursorNode = head;
+    }
+
+    @Override
+    public void add(int index, Object element) throws RuntimeException{
+        if (index > size || index < 0){
+            throw new ArrayIndexOutOfBoundsException("index out of bound, index = " + index + " , size = " + size );
+        } else if ( element == null ){
+            throw new RuntimeException("null value isn't allowed to be added to to list");
+        } else if (index == size) {
+            add(element);
+            return;
+        } else if (index == 0){
+            DNode newNode = new DNode(element,head,null);
+            head.setPrevious(newNode);
+            head = newNode;
+        } else {
+            DNode currentNode = head;
+            for (int i = index; i > 0 ; i--) {
+                currentNode = currentNode.getNext();
+            }
+            DNode newNode = new DNode(element,currentNode,currentNode.getPrevious());
+            currentNode.getPrevious().setNext(newNode);
+            currentNode.setPrevious(newNode);
+        }
+        size++;
+    } // done and tested
+
+    public int indexOf(Object obj){
+        DNode currentNode = head;
+        for (int i = 0; i < size ; i++) {
+            if (currentNode.getData().equals(obj)) return i;
+            currentNode = currentNode.getNext();
+        }
+        return -1;
+    }
+
+    @Override
+    public void add(Object element) throws RuntimeException{
+        if (element == null) {
+            throw new RuntimeException("null value isn't allowed to be added to to list");
+        }
+        if (this.isEmpty()){
+            head.setData(element);
+        } else if (this.tail.getData() == null){
+            tail.setData(element);
+        } else {
+            DNode newNode = new DNode(element,null,tail);
+            tail.setNext(newNode);
+            tail = newNode;
+        }
+        this.size++;
+    } // done and tested
+
+    @Override
+    public Object get(int index) throws RuntimeException{
+        DNode node = this.findNode(index);
+        if (node == null){
+            throw new RuntimeException("didn't find any element in that index " + index);
+        }
+        return node.getData();
+    } // done and tested
+
+    private DNode findNode(int index) throws RuntimeException{
+        if (index >= size || index < 0){
+            throw new RuntimeException("index out of bound, index = " + index + " , size = " + size);
+        } else if (size == 1){
+            return head;
+        } else if (index == size - 1) return tail;
+        DNode currentNode = head;
+        for (int i = 0; i < index ; i++) {
+            currentNode = currentNode.getNext();
+        }
+        return currentNode;
+    } // done and tested
+
+    private DNode findNode(Object obj){
+        DNode currentNode = head;
+        for (int i = 0; i < size ; i++) {
+            currentNode = currentNode.getNext();
+            if (currentNode.getData().equals(obj)) return currentNode;
+        }
+        return null;
+    }
+
+    @Override
+    public void set(int index, Object element) {
+        DNode node = findNode(index);
+        node.setData(element);
+    } // done and tested
+
+    @Override
+    public void clear() { // tested and worked
+        this.head = new DNode(null,null,null);
+        this.tail = new DNode(null,null,this.head);
+        this.head.setNext(this.tail);
+        size = 0;
+    } // tested and worked
+
+    @Override
+    public boolean isEmpty() {
+        return size == 0 || head.getData() == null;
+    } // done and tested
+
+    @Override
+    public void remove(int index) {
+        DNode node = findNode(index);
+        remove(node);
+    }  // done and tested
+
+    private void remove(DNode node){
+        if (head.equals(node)) {
+            if (head.getNext().getData() == null || head.getNext() == tail){
+                head.setData(head.getNext().getData());
+                head.getNext().setData(null);
+            } else {
+                head = head.getNext();
+                head.setPrevious(null);
+            }
+        } else if (tail.equals(node)){
+            if (tail.getPrevious() == head){
+                tail.setData(null);
+            } else {
+                tail = tail.getPrevious();
+                tail.setNext(null);
+            }
+        } else {
+            node.getNext().setPrevious(node.getPrevious());
+            node.getPrevious().setNext(node.getNext());
+        }
+        size--;
+    }
+
+    @Override
+    public int size() {
+        return this.size;
+    } // done and tested
+
+    @Override
+    public DLinkedList sublist(int fromIndex, int toIndex) throws RuntimeException {
+        if ((fromIndex > toIndex) || (fromIndex < 0 || fromIndex >= size) || (toIndex >= size)) {
+            throw new RuntimeException("wrong indexes , start = " + fromIndex + " , end = " + toIndex + " , size = " + size);
+        }
+        DLinkedList list = new DLinkedList();
+        DNode currentNode = findNode(fromIndex);
+        for (int i = fromIndex ; i <= toIndex ; i++ ){
+            list.add(currentNode);
+            currentNode = currentNode.getNext();
+        }
+        return list;
+    }  // done and tested
+
+    public void setCursor (int index){
+        cursorNode = findNode(index);
+    } // done and tested
+
+    public Object getCurrent(){
+        return this.cursorNode.getData();
+    } // done and tested
+
+    public Object getNext(){
+        if (cursorNode.getNext() != null){
+            cursorNode = cursorNode.getNext();
+            cursorIndex++;
+            return cursorNode.getData();
+        }
+        return null;
+    } // done and tested
+
+    public Object getPrevious(){
+        if (cursorNode.getPrevious() != null){
+            cursorNode = cursorNode.getPrevious();
+            cursorIndex--;
+            return cursorNode.getData();
+        }
+        return null;
+    } // done and tested
+
+    public boolean hasNext(){
+        if (cursorNode.getNext() == null) return false;
+        return cursorNode.getNext().getData() != null;
+    } // done and tested
+
+    public boolean hasPrevious(){
+        if (cursorNode.getPrevious() == null) return false;
+        return cursorNode.getPrevious().getData() != null;
+    } // done and tested
+
+    public int getCursorIndex (){
+        return cursorIndex;
+    } // done and tested
+
+    public void removeCurrent(){
+        if (this.isEmpty()) return;
+        remove(cursorNode);
+        if (this.isEmpty()) return;
+        setCursor(0);
+    } // done and tested
+
+    @Override
+    public boolean contains(Object o) {
+        if (this.isEmpty()) return false;
+        if (o == null) return false;
+        DNode currentNode = head;
+        while (currentNode != null && currentNode.getData() != null) {
+            if (currentNode.getData().equals(o)) return true;
+            currentNode = currentNode.getNext();
+        }
+        return false;
+    } // done and tested
+
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder("[");
+        DNode currentNode = head;
+        for (int i = 0 ; i < size ; i++){
+            s.append(currentNode.getData());
+            if (i < size - 1) s.append(",");
+            currentNode = currentNode.getNext();
+        }
+        s.append("]");
+        return s.toString();
+    }  // done and tested
+
+    private class DNode {
+        private Object data;
+        private DNode next;
+        private DNode previous;
+
+        public DNode(Object data, DNode next, DNode previous) {
+            this.data = data;
+            this.next = next;
+            this.previous = previous;
+        }
+
+        public Object getData() {
+            return data;
+        }
+
+        public void setData(Object data) {
+            this.data = data;
+        }
+
+        public DNode getNext() {
+            return next;
+        }
+
+        public void setNext(DNode next) {
+            this.next = next;
+        }
+
+        public DNode getPrevious() {
+            return previous;
+        }
+
+        public void setPrevious(DNode previous) {
+            this.previous = previous;
+        }
+
+        @Override
+        public String toString() {
+            if (this.data == null) return null;
+            return this.data.toString();
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) return true;
+            DNode node = (DNode) obj;
+            return this.getData().equals(node.getData()) &&
+                    this.getNext().equals(node.getNext())&&
+                    this.getPrevious().equals(node.getPrevious());
+        }
+    } // done and tested
+}

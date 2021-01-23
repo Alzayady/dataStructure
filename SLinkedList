@@ -1,0 +1,169 @@
+package eg.edu.alexu.csd.datastructure.linkedList.cs<03>_cs<08>;
+
+public class SLinkedList {
+    Node temp;
+    Node head;
+    int size = 0;
+
+    public SLinkedList() {
+        head = null;
+    }
+
+    public void add(int index, Object element) throws RuntimeException {
+        if (index > size || index < 0)
+            throw new ArrayIndexOutOfBoundsException("index out of bound, index = " + index + " , size = " + size);
+
+        if (index == 0) {
+            temp = new Node(element, head);
+            head = temp;
+            size++;
+        } else {
+            Node temp = head;
+            for (int i = 1; i < index; i++) {
+                temp = temp.getNext();
+            }
+            Node goal = new Node(element, temp.getNext());
+            temp.setNext(goal);
+            size++;
+        }
+
+    }
+
+    public void add(Object element) {
+        if (size == 0) {
+            head = new Node(element, null);
+            size++;
+            return;
+        }
+
+        temp = head;
+
+        while (temp.getNext() != null) {
+            temp = temp.getNext();
+        }
+        temp.setNext(new Node(element, null));
+        size++;
+    }
+
+    public Object get(int index) throws RuntimeException {
+        if (index < 0 || index >= size)
+            throw new RuntimeException("didn't find any element in that index " + index);
+
+        temp = head;
+        for (int i = 0; i < index; i++) {
+            temp = temp.getNext();
+        }
+        return temp.getValue();
+
+    }
+
+    public void set(int index, Object element) throws RuntimeException {
+        if (index < 0 || index >= size)
+            throw new RuntimeException("didn't find any element in that index " + index);
+
+        temp = head;
+        for (int i = 0; i < index; i++) {
+            temp = temp.getNext();
+        }
+        temp.setValue(element);
+
+    }
+
+    public void clear() {
+        head = null;
+        size = 0;
+    }
+
+    public boolean isEmpty() {
+        return head == null;
+    }
+
+    public void remove(int index) throws RuntimeException {
+        if (index < 0 || index >= size)
+            throw new RuntimeException("didn't find any element in that index " + index);
+        if (index == 0) {
+            head = head.getNext();
+            size--;
+        } else {
+            temp = head;
+            for (int i = 0; i < index - 1; i++) {
+                temp = temp.getNext();
+            }
+            temp.setNext(temp.getNext().getNext());
+            size--;
+
+        }
+    }
+
+    public int size() {
+        return size;
+    }
+
+    public SLinkedList sublist(int fromIndex, int toIndex) throws RuntimeException {
+
+        if (fromIndex > toIndex)
+            throw new RuntimeException("error In Parameters ");
+
+        if (fromIndex < 0 || fromIndex >= size || toIndex < 0 || toIndex >= size)
+            throw new RuntimeException("Bounding Error");
+
+        SLinkedList to = new SLinkedList();
+        temp = head;
+        for (int i = 0; i < fromIndex; i++) {
+            temp = temp.getNext();
+        }
+        for (int i = fromIndex; i <= toIndex; i++) {
+            to.add(temp.getValue());
+            temp = temp.getNext();
+        }
+        return to;
+    }
+
+    public boolean contains(Object o) {
+        temp = head;
+        while (temp != null) {
+            if (temp.getValue() == o) {
+                return true;
+            }
+            temp = temp.getNext();
+        }
+        return false;
+    }
+
+    public void print() {
+        Node temp = head;
+        while (temp != null) {
+            System.out.println(temp.getValue());
+            temp = temp.getNext();
+        }
+
+    }
+
+    private class Node {
+        private Object value;
+        private Node Next;
+
+        public Node(Object value, Node Next) {
+            this.Next = Next;
+            this.value = value;
+        }
+
+        public Node getNext() {
+            return Next;
+        }
+
+        public void setNext(Node N) {
+            Next = N;
+        }
+
+        public Object getValue() {
+            return value;
+        }
+
+        public void setValue(Object value) {
+            this.value = value;
+        }
+    }
+
+
+}
